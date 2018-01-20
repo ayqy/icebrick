@@ -1,0 +1,26 @@
+{
+  "name": "icebrick",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "export-spec": "node scripts/component/spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayqy/icebrick.git"
+  },
+  "dependencies": {
+    "antd-mobile": "git+https://ayqy@github.com/ant-design/ant-design-mobile.git#2.1.3"
+  },
+  "author": "ayqy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ayqy/icebrick/issues"
+  },
+  "homepage": "https://github.com/ayqy/icebrick#readme",
+  "devDependencies": {
+    "lerna": "^2.8.0"
+  }
+}

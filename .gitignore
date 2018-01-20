@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# automatically generated files
+config/component-spec.json
