@@ -59,3 +59,4 @@ typings/
 
 # automatically generated files
 config/component-spec.json
+dist

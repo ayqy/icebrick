@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <script src="https://unpkg.com/fastclick@1.0.6/lib/fastclick.js"></script>
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+      }, false);
+    }
+    if(!window.Promise) {
+      document.writeln('<script src="https://unpkg.com/es6-promise@4.2.2/dist/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+    }
+  </script>
+  <link rel="stylesheet" href="./dist/index.css">
+</head>
+<body>
+  <div id="example" />
+  <script src="https://cdn.jsdelivr.net/combine/npm/react@16.0.0/umd/react.production.min.js,npm/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script src="./dist/shared.js"></script>
+  <script src="./dist/index.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
 
 const CWD = process.cwd();
-const COMPONENTS_DIR = path.resolve(CWD, './node_modules/antd-mobile/components');
+const COMPONENTS_DIR = path.resolve(CWD, './node_modules/antd-mobile-src/components');
 const OUTPUT_FILE = path.resolve(CWD, './config/component-spec.json');
 
 function getSourceDocFiles(dir) {
