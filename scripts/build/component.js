@@ -1,5 +1,7 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const fs = require('fs');
+const webpack = require('webpack');
+const VirtualModulePlugin = require('virtual-module-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
@@ -24,6 +26,9 @@ const postcssOpts = {
     // pxtorem({ rootValue: 100, propWhiteList: [] })
   ],
 };
+const wrapedEntryPath = './entry.js';
+const virtualEntryPath = 'examples/component.jsx';
+const actualEntryPath = path.resolve(__dirname, 'examples/component.jsx');
 
 let config;
 const compiler = webpack(config = {
@@ -32,8 +37,7 @@ const compiler = webpack(config = {
     disableHostCheck: true
   },
 
-  entry: { "index": path.resolve(__dirname, 'examples/component.jsx') },
-  // entry: { "index": path.resolve(__dirname, 'examples/app/index.jsx') },
+  entry: { "index": wrapedEntryPath },
 
   output: {
     filename: '[name].js',
@@ -88,6 +92,10 @@ const compiler = webpack(config = {
     "react-dom": "ReactDOM"
   },
   plugins: [
+    new VirtualModulePlugin({
+      moduleName: virtualEntryPath,
+      contents: fs.readFileSync(actualEntryPath, 'utf8')
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     // new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new webpack.optimize.CommonsChunkPlugin({
