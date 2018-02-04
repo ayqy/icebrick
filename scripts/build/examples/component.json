@@ -1,0 +1,87 @@
+{
+  "component": "WingBlank",
+  "version": "0.0.1",
+  "children": [{
+    "component": "Button",
+    "version": "0.0.1",
+    "children": [
+      "default"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "disabled": true
+    },
+    "children": [
+      "default disabled"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "type": "primary"
+    },
+    "children": [
+      "primary"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "type": "warning"
+    },
+    "children": [
+      "warning"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "loading": true
+    },
+    "children": [
+      "loading button"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "icon": "check-circle-o"
+    },
+    "children": [
+      "with icon"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "Button",
+    "version": "0.0.1",
+    "props": {
+      "type": "ghost",
+      "inline": true,
+      "className": "am-button-borderfix",
+      "disabled": true,
+      "type": "ghost"
+    },
+    "children": [
+      "ghost disabled"
+    ]
+  }]
+}

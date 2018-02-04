@@ -1,10 +1,13 @@
 const path = require('path');
 const fs = require('fs');
+
+const _ = require('lodash');
 const webpack = require('webpack');
 const VirtualModulePlugin = require('virtual-module-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
+const ConfigParser = require('./util/ConfigParser');
 
 const Visualizer = require('webpack-visualizer-plugin'); // remove it in production environment.
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // remove it in production environment.
@@ -27,11 +30,15 @@ const postcssOpts = {
   ],
 };
 const wrapedEntryPath = './entry.js';
-const virtualEntryPath = 'examples/component.jsx';
-const actualEntryPath = path.resolve(__dirname, 'examples/component.jsx');
+const virtualEntryPath = './app.jsx';
+const virtualPlaceholdersPath = [
+  './before-app.css',
+  './before-app.js',
+  './after-app.css',
+  './after-app.js'
+];
 
-let config;
-const compiler = webpack(config = {
+let config = (actualEntryContent, placeholdersContent = {}) => ({
   devtool: 'source-map', // or 'inline-source-map'
   devServer: {
     disableHostCheck: true
@@ -94,8 +101,14 @@ const compiler = webpack(config = {
   plugins: [
     new VirtualModulePlugin({
       moduleName: virtualEntryPath,
-      contents: fs.readFileSync(actualEntryPath, 'utf8')
+      contents: actualEntryContent
     }),
+    ...(virtualPlaceholdersPath.map(path =>
+      new VirtualModulePlugin({
+        moduleName: path,
+        contents: placeholdersContent[path] || ''
+      })
+    )),
     new webpack.optimize.ModuleConcatenationPlugin(),
     // new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new webpack.optimize.CommonsChunkPlugin({
@@ -108,29 +121,41 @@ const compiler = webpack(config = {
   ]
 });
 
+module.exports = function startup(configPath) {
+  // setup dev server
+  const express = require('express'); //your original BE server
+  const app = express();
+  const PORT = 8887;
 
-// setup dev server
-const express = require('express'); //your original BE server
-const app = express();
-const PORT = 8887;
-
-compiler.run((err, stats) => {
-  if (err || stats.hasErrors()) {
-    // Handle errors here
-    console.error(err);
-  }
-  // Done processing
-  console.log('Build successfully.');
-  //!!! Seem to does not work on win
-  // app.use(middleware(compiler, {
-  //   publicPath: config.output.publicPath,
-  //   stats: {colors: true},
-  //   log: console.log
-  // }));
-  // Fallback to static host
-  app.use(express.static('./'));
-  app.get('/', function (req, res) {
-    res.redirect(302, './component.html');
+  const parser = new ConfigParser(require(configPath));
+  const parsed = parser.parse();
+  const bundle = parser.bundle();
+  const actualEntryContent = bundle.jsx;
+// console.log(actualEntryContent);
+// console.log(parsed.css);
+// console.log(parsed.js);
+  const compiler = webpack(config(actualEntryContent, {
+    './after-app.css': (_.get(parsed.css, ['inline']) || []).join('\n'),
+    './after-app.js': (_.get(parsed.js, ['inline']) || []).join('\n')
+  }));
+  compiler.run((err, stats) => {
+    if (err || stats.hasErrors()) {
+      // Handle errors here
+      console.error(err);
+    }
+    // Done processing
+    console.log('Build successfully.');
+    //!!! Seems not working on Windows
+    // app.use(middleware(compiler, {
+    //   publicPath: config.output.publicPath,
+    //   stats: {colors: true},
+    //   log: console.log
+    // }));
+    // Fallback to static host
+    app.use(express.static('./'));
+    app.get('/', function (req, res) {
+      res.redirect(302, './index.html');
+    });
+    app.listen(PORT, () => console.log(`Webpack dev server is running on http://127.0.0.1:${PORT}`));
   });
-  app.listen(PORT, () => console.log(`Webpack dev server is running on http://127.0.0.1:${PORT}`));
-});
+}

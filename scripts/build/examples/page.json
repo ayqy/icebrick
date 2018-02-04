@@ -1,0 +1,127 @@
+{
+  "component": "div",
+  "version": "0.0.1",
+  "props": {
+    "className": "result-example"
+  },
+  "children": [{
+    "component": "div",
+    "version": "0.0.1",
+    "props": {
+      "className": "sub-title"
+    },
+    "children": [
+      "支付成功"
+    ]
+  }, {
+    "component": "Result",
+    "version": "0.0.1",
+    "props": {
+      "img": ["<img src=\"https://gw.alipayobjects.com/zos/rmsportal/pdFARIqkrKEGVVEwotFe.svg\" className=\"spe am-icon am-icon-md\" alt=\"\" />"],
+      "title": "支付成功",
+      "message": ["<div>998.00元 <del>1098元</del></div>"]
+    },
+    "children": [
+      "支付成功"
+    ]
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "div",
+    "version": "0.0.1",
+    "props": {
+      "className": "sub-title"
+    },
+    "children": [
+      "验证成功"
+    ]
+  }, {
+    "component": "Result",
+    "version": "0.0.1",
+    "props": {
+      "img": ["<Icon type=\"check-circle\" className=\"spe\" style={{ fill: '#1F90E6' }} />", "Icon"],
+      "title": "验证成功",
+      "message": "所提交内容已成功完成验证"
+    }
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "div",
+    "version": "0.0.1",
+    "props": {
+      "className": "sub-title"
+    },
+    "children": [
+      "支付失败"
+    ]
+  }, {
+    "component": "Result",
+    "version": "0.0.1",
+    "props": {
+      "img": ["<Icon type=\"cross-circle-o\" className=\"spe\" style={{ fill: '#F13642' }} />", "Icon"],
+      "title": "支付失败",
+      "message": "所选银行卡余额不足"
+    }
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "div",
+    "version": "0.0.1",
+    "props": {
+      "className": "sub-title"
+    },
+    "children": [
+      "等待处理"
+    ]
+  }, {
+    "component": "Result",
+    "version": "0.0.1",
+    "props": {
+      "img": ["<img src=\"https://gw.alipayobjects.com/zos/rmsportal/HWuSTipkjJRfTWekgTUG.svg\" className=\"spe am-icon am-icon-md\" alt=\"\" />"],
+      "title": "等待处理",
+      "message": "已提交申请，等待银行处理"
+    }
+  }, {
+    "component": "WhiteSpace",
+    "version": "0.0.1"
+  }, {
+    "component": "div",
+    "version": "0.0.1",
+    "props": {
+      "className": "sub-title"
+    },
+    "children": [
+      "操作失败"
+    ]
+  }, {
+    "component": "Result",
+    "version": "0.0.1",
+    "props": {
+      "img": ["<img src=\"https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg\" className=\"spe am-icon am-icon-md\" alt=\"\" />"],
+      "title": "无法完成操作",
+      "message": "由于你的支付宝账户还未绑定淘宝账户请登请登录www.taobao.com"
+    }
+  }],
+  "extra": {
+    "css": [{
+      "type": "inline",
+      "content": ".result-example .spe { width: 60px; height: 60px; } .sub-title { color: #888; font-size: 14px; padding: 30px 0 18px 0; margin-left: 15px; }"
+    }, {
+      "type": "external",
+      "url": "",
+      "position": ""
+    }],
+    "js": [{
+      "type": "inline",
+      "content": "console.log('here')",
+      "position": ""
+    }, {
+      "type": "external",
+      "url": "",
+      "position": ""
+    }]
+  }
+}
